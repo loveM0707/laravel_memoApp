@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Memo;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('create');
+    }
+
+    /**
+     * メモの保存処理
+     */
+    public function store(Request $request)
+    {
+        // POST値を全て取得
+        $posts = $request->all();
+
+        // DBに保存
+        Memo::insert(['content' => $posts['content'], 'user_id' => \Auth::id()]);
+
+        // ページをリダイレクト
+        return redirect( route('home') );
     }
 }
