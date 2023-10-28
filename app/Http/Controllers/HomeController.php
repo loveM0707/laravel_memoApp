@@ -81,4 +81,19 @@ class HomeController extends Controller
         // ページをリダイレクト
         return redirect( route('home') );
     }
+
+    /**
+     * メモの削除処理
+     */
+    public function destroy(Request $request)
+    {
+        // POST値を全て取得
+        $posts = $request->all();
+
+        // DBを更新（whereを前の方に入れる）
+        Memo::where('id', $posts['memo_id'])->update(['deleted_at' => date("Y-m-d H:i:s", time())]);
+
+        // ページをリダイレクト
+        return redirect( route('home') );
+    }
 }
