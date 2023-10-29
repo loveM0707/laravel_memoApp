@@ -15,6 +15,8 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">
+    <link href="/css/layout.css" rel="stylesheet">
     @yield('javascript')
 </head>
 <body>
@@ -76,28 +78,28 @@
         {{-- 3カラムに変更 --}}
         <main class="">
             <div class="row">
-                <div class="col-md-2 p-0">
+                <div class="col-sm-12 col-md-2 p-0">
                     <div class="card">
                         <div class="card-header">タグ一覧</div>
-                        <div class="card-body">
-                            <a href="/" class="card-text d-block">すべて表示</a>
+                        <div class="card-body my-card-body">
+                            <a href="/" class="card-text d-block mb-2">すべて表示</a>
                             @foreach($tags as $tag)
-                                <a href="/?tag={{ $tag['id'] }}" class="card-text d-block">{{ $tag['name'] }}</a>
+                                <a href="/?tag={{ $tag['id'] }}" class="card-text d-block mb-2">{{ $tag['name'] }}</a>
                             @endforeach
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 p-0">
+                <div class="col-sm-12 col-md-4 p-0">
                     <div class="card">
-                        <div class="card-header">メモ一覧</div>
-                        <div class="card-body">
+                        <div class="card-header d-flex justify-content-between">メモ一覧 <a href="{{ route('home') }}"><i class="fa-solid fa-circle-plus"></i></a></div>
+                        <div class="card-body my-card-body">
                             @foreach($memos as $memo)
-                                <a href="/edit/{{ $memo['id'] }}" class="card-text d-block">{{ $memo['content'] }}</a>
+                                <a href="/edit/{{ $memo['id'] }}" class="card-text d-block ellipsis mb-2">{{ $memo['content'] }}</a>
                             @endforeach
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 p-0">
+                <div class="col-sm-12 col-md-6 p-0">
                     @yield('content')
                 </div>
             </div>
