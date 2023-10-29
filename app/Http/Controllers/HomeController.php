@@ -38,6 +38,9 @@ class HomeController extends Controller
         // POST値を全て取得
         $posts = $request->all();
 
+        // バリデーション
+        $request->validate(['content' => 'required']);
+
         // トランザクション
         DB::transaction(function() use($posts) {
             // メモをDBに登録
@@ -95,6 +98,9 @@ class HomeController extends Controller
     {
         // POST値を全て取得
         $posts = $request->all();
+
+        // バリデーション
+        $request->validate(['content' => 'required']);
 
         // トランザクション
         DB::transaction(function() use($posts) {
