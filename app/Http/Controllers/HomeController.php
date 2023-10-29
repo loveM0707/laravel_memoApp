@@ -27,20 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // ログイン中のユーザーのメモ一覧を取得
-        $memos = Memo::select('memos.*')
-            ->where('user_id', '=', \Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('updated_at', 'DESC')
-            ->get();
-
-        $tags = Tag::select('tags.*')
-            ->where('user_id', '=', \Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('id', 'DESC')
-            ->get();
-
-        return view('create', compact('memos', 'tags'));
+        return view('create');
     }
 
     /**
@@ -84,20 +71,6 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
-        // ログイン中のユーザーのメモ一覧を取得
-        $memos = Memo::select('memos.*')
-            ->where('user_id', '=', \Auth::id())
-            ->whereNull('deleted_at')
-            ->orderBy('updated_at', 'DESC')
-            ->get();
-
-        // タグ一覧を取得
-        $tags = Tag::select('tags.*')
-        ->where('user_id', '=', \Auth::id())
-        ->whereNull('deleted_at')
-        ->orderBy('id', 'DESC')
-        ->get();
-
         // IDから抽出する
         $editMemo = Memo::select('memos.*', 'tags.id AS tag_id')
             ->leftJoin('memo_tags', 'memo_tags.memo_id', '=', 'memos.id')
@@ -112,7 +85,7 @@ class HomeController extends Controller
             $includeTags[] = $memo['tag_id'];
         }
 
-        return view('edit', compact('memos', 'tags', 'editMemo', 'includeTags'));
+        return view('edit', compact('editMemo', 'includeTags'));
     }
 
     /**

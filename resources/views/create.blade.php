@@ -8,7 +8,7 @@
         <div class="input-group mb-3">
             <textarea class="form-control" name="content" rows="3" placeholder="ここにメモを入力"></textarea>
         </div>
-        @foreach ($tags as $tag)
+                @foreach ($tags as $tag)
             <div class="form-check form-check-inline mb-3">
                 <input class="form-check-input" type="checkbox" name="tags[]" id="tag-{{ $tag['id'] }}" value="{{ $tag['id'] }}">
                 <label class="form-check-label" for="tag-{{ $tag['id'] }}">{{ $tag['name'] }}</label>
